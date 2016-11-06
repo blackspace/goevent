@@ -4,10 +4,10 @@ type Event struct {
 	*Delegate
 }
 
-func DefineOrTakeEvent(eid int) *Event {
-	return &Event{_event_run_loop.GetOrCreateDelegate(eid)}
+func NewEvent() *Event {
+	return &Event{NewDelegate()}
 }
 
-func (e *Event) Fire(s Source, a EventArg) {
-	_event_run_loop.AddEvent(e.Id, s, a)
+func (e *Event)Fire(s Source, a EventArg) {
+	e.Exec(s, a)
 }
