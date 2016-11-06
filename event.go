@@ -10,8 +10,8 @@ type Event struct {
 	*Delegate
 }
 
-func NewEvent()  *Event{
-	return &Event{_event_run_loop.CreateNewDelegate()}
+func GetEvent(eid int)  *Event{
+	return &Event{_event_run_loop.GetOrCreateDelegate(eid)}
 }
 
 func (e *Event)Fire(s Source,a EventArg) {

@@ -6,15 +6,17 @@ import (
 	"log"
 )
 
+const (
+	TickEvent = iota
+)
+
 type MyTick struct {
 	*time.Ticker
 	TickEvent *Event
 }
 
-
-
 func NewMyTick() *MyTick {
-	return &MyTick{Ticker:time.NewTicker(time.Second),TickEvent:NewEvent()}
+	return &MyTick{Ticker:time.NewTicker(time.Second),TickEvent:GetEvent(TickEvent)}
 }
 
 func main() {

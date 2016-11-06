@@ -55,9 +55,22 @@ func (el *EventLoop)CreateNewDelegate() *Delegate {
 	}
 
 
-	panic("Too Event , MaxEventCount is "+ strconv.Itoa(MaxEventCount))
+	panic("Too many Event , MaxEventCount is "+ strconv.Itoa(MaxEventCount))
 }
 
+
+
+func (el *EventLoop)GetOrCreateDelegate(eid int) *Delegate {
+	d:=el.GetDelegate(eid)
+
+	if d==nil {
+		d=NewDelegate(eid)
+		el._delegates=append(el._delegates,d)
+		return d
+	} else {
+		return d
+	}
+}
 
 func (el *EventLoop)AddEvent(eid int,s Source,a EventArg) {
 	el._channel<-LoopItem{_event_id:eid, _source:s, _event_arg:a}
