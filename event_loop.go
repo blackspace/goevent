@@ -1,8 +1,7 @@
 package goevent
 
 import (
-	"reflect"
-	"strconv"
+	"fmt"
 )
 
 
@@ -55,7 +54,7 @@ func (el *EventLoop)CreateNewDelegate() *Delegate {
 	}
 
 
-	panic("Too many Event , MaxEventCount is "+ strconv.Itoa(MaxEventCount))
+	panic(fmt.Sprintf("Too many Event , MaxEventCount is %v\n",MaxEventCount))
 }
 
 
@@ -82,10 +81,12 @@ func (el *EventLoop)Run() {
 
 		var d *Delegate =el.GetDelegate(e._event_id)
 
-		if d!=nil {
-			d.Exec(e._source,e._event_arg)
+		if d==nil {
+			panic(fmt.Sprintf("Can't find a delegate for the event id %v\n",e._event_id))
+		} else if ! d.HasHandler() {
+			panic(fmt.Sprintf("This delegate of event id %v has Not a handler",e._event_id))
 		} else {
-			panic("Can't find a handler for the event of "+reflect.TypeOf(e).String()+".")
+			d.Exec(e._source,e._event_arg)
 		}
 	}
 }
