@@ -9,5 +9,5 @@ func DefineOrTakeEvent(eid int) *Event {
 }
 
 func (e *Event) Fire(s Source, a EventArg) {
-	_event_run_loop.AddEvent(e.EventId, s, a)
+	_event_run_loop.AddEvent(e.Id, s, a)
 }

@@ -23,7 +23,7 @@ func (el *EventLoop) GetDelegate(eid int) *Delegate {
 	var d *Delegate
 
 	for i := 0; i < len(el._delegates); i++ {
-		if el._delegates[i].EventId == eid {
+		if el._delegates[i].Id == eid {
 			d = el._delegates[i]
 			break
 		}
