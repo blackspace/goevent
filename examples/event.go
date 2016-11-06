@@ -16,7 +16,7 @@ type MyTick struct {
 }
 
 func NewMyTick() *MyTick {
-	return &MyTick{Ticker:time.NewTicker(time.Second),TickEvent:DefineOrGetEvent(TickEvent)}
+	return &MyTick{Ticker:time.NewTicker(time.Second),TickEvent:DefineOrTakeEvent(TickEvent)}
 }
 
 func main() {

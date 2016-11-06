@@ -10,7 +10,7 @@ type Event struct {
 	*Delegate
 }
 
-func DefineOrGetEvent(eid int)  *Event{
+func DefineOrTakeEvent(eid int)  *Event{
 	return &Event{_event_run_loop.GetOrCreateDelegate(eid)}
 }
 
