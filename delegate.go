@@ -1,5 +1,7 @@
 package goevent
 
+import "strconv"
+
 type Delegate struct {
 	EventId  int
 	Handlers []Handler
@@ -18,8 +20,21 @@ func (d *Delegate)AddHandler(h Handler) {
 	d.Handlers =append(d.Handlers,h)
 }
 
+func (d *Delegate)HasHandler() bool {
+	if len(d.Handlers)==0 {
+		return false
+	} else {
+		return true
+	}
+}
+
 func (d *Delegate)Exec(s Source,a EventArg) {
 	for _,h:=range d.Handlers {
-		h(s,a)
+		if h!=nil {
+			h(s,a)
+		} else {
+			panic("this delegate of EventId "+strconv.Itoa(d.EventId)+" has a nil handler")
+		}
+
 	}
 }

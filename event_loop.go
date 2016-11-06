@@ -2,6 +2,7 @@ package goevent
 
 import (
 	"reflect"
+	"strconv"
 )
 
 
@@ -39,9 +40,11 @@ func (el *EventLoop)GetDelegate(eid int) *Delegate {
 	}
 }
 
+const MaxEventCount  = 100000
 
 func (el *EventLoop)CreateNewDelegate() *Delegate {
-	for id := 0; id < 100000; id++ {
+
+	for id := 0; id < MaxEventCount; id++ {
 		d := el.GetDelegate(id)
 
 		if d == nil {
@@ -51,7 +54,8 @@ func (el *EventLoop)CreateNewDelegate() *Delegate {
 		}
 	}
 
-	return nil
+
+	panic("Too Event , MaxEventCount is "+ strconv.Itoa(MaxEventCount))
 }
 
 
